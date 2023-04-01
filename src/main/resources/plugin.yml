@@ -1,0 +1,4 @@
+name: OnlyZombies
+version: '${project.version}'
+main: dev.neuralnexus.onlyzombies.OnlyZombies
+api-version: 1.19
