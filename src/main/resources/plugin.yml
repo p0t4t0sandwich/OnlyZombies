@@ -1,4 +1,14 @@
 name: OnlyZombies
 version: '${project.version}'
 main: dev.neuralnexus.onlyzombies.OnlyZombies
-api-version: 1.19
+commands:
+  zspawngroup:
+    description: "Spawn a group of zombies"
+    usage: "/zspawngroup <amount>"
+    permission: oz.zspawngroup
+    aliases: [zsg]
+  zspawnhorde:
+    description: "Spawn a horde of zombies"
+    usage: "/zspawnhorde <amount> <region>"
+    permission: oz.zspawnhorde
+    aliases: [zsh]

@@ -1,0 +1,7 @@
+version: 1
+enabled: true
+regions:
+  region1:
+    world: "world"
+    pos1: {x: -100, y: 0, z: -100}
+    pos2: {x: 100, y: 256, z: 100}
