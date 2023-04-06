@@ -21,31 +21,36 @@ public class SpawnHordeCommand implements CommandExecutor {
         if (sender instanceof Player && !sender.hasPermission("oz.zspawnhorde")) {
             message = "§cYou do not have permission to use this command!";
         } else {
-            Region region = getRegion(args[0]);
-            if (region == null) {
-                message = "§cThat region does not exist!";
-            } else {
-                // pick a random location in the region
-                World world = plugin.getServer().getWorld(region.world);
-                // random number between 0 and 1
-                Random random = new Random();
-                double xMult = random.nextDouble();
-                double yMult = random.nextDouble();
-                double zMult = random.nextDouble();
+            if (args.length != 0) {
+                Region region = getRegion(args[0]);
+                if (region == null) {
+                    message = "§cThat region does not exist!";
+                } else {
+                    // pick a random location in the region
+                    World world = plugin.getServer().getWorld(region.world);
+                    // random number between 0 and 1
+                    Random random = new Random();
+                    double xMult = random.nextDouble();
+                    double yMult = random.nextDouble();
+                    double zMult = random.nextDouble();
 
-                int x = (int) (region.pos1.x + (region.pos2.x - region.pos1.x) * xMult);
-                int y = (int) (region.pos1.y + (region.pos2.y - region.pos1.y) * yMult);
-                int z = (int) (region.pos1.z + (region.pos2.z - region.pos1.z) * zMult);
+                    int x = (int) (region.pos1.x + (region.pos2.x - region.pos1.x) * xMult);
+                    int y = (int) (region.pos1.y + (region.pos2.y - region.pos1.y) * yMult);
+                    int z = (int) (region.pos1.z + (region.pos2.z - region.pos1.z) * zMult);
 
-                Location loc = new Location(world, x, y, z);
+                    Location loc = new Location(world, x, y, z);
 
 
-                // Spawn a horde of zombies
-                for (int i = 0; i < 10; i++) {
-                    world.spawnEntity(loc, EntityType.ZOMBIE);
+                    // Spawn a horde of zombies
+                    for (int i = 0; i < region.hoardSize; i++) {
+                        assert world != null;
+                        world.spawnEntity(loc, EntityType.ZOMBIE);
+                    }
+
+                    message = "§aSpawned a horde of zombies in the region " + args[0] + "!";
                 }
-
-                message = "§aSpawned a horde of zombies in the region " + args[0] + "!";
+            } else {
+                message = "§cYou must specify a region!";
             }
         }
         sender.sendMessage(message);

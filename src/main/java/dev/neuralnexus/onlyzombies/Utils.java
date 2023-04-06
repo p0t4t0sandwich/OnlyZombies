@@ -37,11 +37,13 @@ public class Utils {
         public String world;
         public Coords pos1;
         public Coords pos2;
+        public int hoardSize;
 
-        public Region(String world, Coords pos1, Coords pos2) {
+        public Region(String world, Coords pos1, Coords pos2, int hoardSize) {
             this.world = world;
             this.pos1 = pos1;
             this.pos2 = pos2;
+            this.hoardSize = hoardSize;
         }
     }
 
@@ -62,8 +64,10 @@ public class Utils {
         int pos2Y = plugin.config.getInt("regions." + regionName + ".pos2.y");
         int pos2Z = plugin.config.getInt("regions." + regionName + ".pos2.z");
 
+        int hoardSize = plugin.config.getInt("regions." + regionName + ".hoardSize");
+
         // Return the region
-        return new Region(worldName, new Coords(pos1X, pos1Y, pos1Z), new Coords(pos2X, pos2Y, pos2Z));
+        return new Region(worldName, new Coords(pos1X, pos1Y, pos1Z), new Coords(pos2X, pos2Y, pos2Z), hoardSize);
     }
 
     // Check if the entity is in the region
